@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
     float smoothTurnTime = 0.1f;
     [Header("Detect & Collect")]
     Collider[] collidersCollect;
-    Collider[] collidersStore;
     [SerializeField] Transform detectTransform;
     [SerializeField] float detectionRange = 1;
     [SerializeField] LayerMask layerCollect;
-    [SerializeField] LayerMask layerStore;
     [SerializeField] Transform holdTransform;
     [SerializeField] Transform storeTransform;
     [SerializeField] int itemCount = 0;
+    [SerializeField] int itemStoreCount = 0;
     [SerializeField] float itemDistanceBetween = 0.5f;
     void Start()
     {
@@ -54,26 +53,25 @@ public class PlayerController : MonoBehaviour
 
                 itemCount++;
             }
-        }
 
-        collidersStore = Physics.OverlapSphere(detectTransform.position, detectionRange, layerStore);
-        foreach (var hit in collidersStore)
-        {
             if (hit.CompareTag("Storage") && itemCount > 0) {
-                // hit.tag = "Stored";
-                GameObject col = GameObject.FindGameObjectWithTag("Collected");
-                col.transform.parent = storeTransform;
-                col.tag = "Stored";
-                itemCount--;
 
-                var seq = DOTween.Sequence();
+                foreach (Transform item in holdTransform)
+                {
+                    item.tag = "Stored";
+                    item.transform.parent = storeTransform;
 
-                seq.Append(col.transform.DOLocalJump(new Vector3(0, itemCount * itemDistanceBetween),2, 1, 0.3f)
-                .Join(col.transform.DOScale(1.25f, 0.1f))
-                .Insert(0.1f, col.transform.DOScale(0.3f, 0.2f)));
-                seq.AppendCallback(() => {
-                    col.transform.localRotation = Quaternion.identity;
-                });
+                    var seq = DOTween.Sequence();
+
+                    seq.Append(item.transform.DOLocalJump(new Vector3(0, itemStoreCount * itemDistanceBetween, 0),2, 1, 0.3f)
+                    .Join(item.transform.DOScale(1.25f, 0.1f))
+                    .Insert(0.1f, item.transform.DOScale(0.3f, 0.2f)));
+                    seq.AppendCallback(() => {
+                        item.transform.localRotation = Quaternion.Euler(0,0,0);
+                    });
+                    itemStoreCount++;
+                    itemCount--;
+                }
             }
         }
     }

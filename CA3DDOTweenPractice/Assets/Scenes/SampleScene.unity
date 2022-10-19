@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 476023588}
   m_Layer: 7
   m_Name: StoreTransform
-  m_TagString: Untagged
+  m_TagString: Storage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,13 +582,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476023587}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195430179}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 1195430179}
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531144372
 GameObject:
@@ -1617,18 +1618,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joyStick: {fileID: 686171284}
-  moveSpeed: 5
+  moveSpeed: 10
   detectTransform: {fileID: 777536039}
   detectionRange: 0.65
   layerCollect:
     serializedVersion: 2
-    m_Bits: 64
-  layerStore:
-    serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   holdTransform: {fileID: 2113735147}
   storeTransform: {fileID: 476023588}
   itemCount: 0
+  itemStoreCount: 0
   itemDistanceBetween: 0.31
 --- !u!54 &1108047332
 Rigidbody:
@@ -1735,14 +1734,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195430175}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.39999998, z: 0}
   m_LocalScale: {x: 5, y: 0.5, z: 5}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 476023588}
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_Children: []
+  m_Father: {fileID: 476023588}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1393446709
 GameObject:
