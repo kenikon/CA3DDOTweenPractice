@@ -13,10 +13,10 @@ public class PlayerController : MonoBehaviour
     float currentTurnAngle;
     float smoothTurnTime = 0.1f;
     [Header("Detect & Collect")]
-    Collider[] collidersCollect;
+    Collider[] colliders;
     [SerializeField] Transform detectTransform;
     [SerializeField] float detectionRange = 1;
-    [SerializeField] LayerMask layerCollect;
+    [SerializeField] LayerMask layer;
     [SerializeField] Transform holdTransform;
     [SerializeField] Transform storeTransform;
     [SerializeField] int itemCount = 0;
@@ -32,11 +32,10 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(detectTransform.position, detectionRange);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        collidersCollect = Physics.OverlapSphere(detectTransform.position, detectionRange, layerCollect);
-        foreach (var hit in collidersCollect)
+        colliders = Physics.OverlapSphere(detectTransform.position, detectionRange, layer);
+        foreach (var hit in colliders)
         {
             if (hit.CompareTag("Collectable")) {
                 hit.tag = "Collected";
@@ -63,9 +62,9 @@ public class PlayerController : MonoBehaviour
 
                     var seq = DOTween.Sequence();
 
-                    seq.Append(item.transform.DOLocalJump(new Vector3(0, itemStoreCount * itemDistanceBetween, 0),2, 1, 0.3f)
-                    .Join(item.transform.DOScale(1.25f, 0.1f))
-                    .Insert(0.1f, item.transform.DOScale(0.3f, 0.2f)));
+                    seq.Append(item.transform.DOLocalJump(new Vector3(0, itemStoreCount, 0),2, 1, 0.3f)
+                    .Join(item.transform.DOScale(1.5f, 0.1f))
+                    .Insert(0.1f, item.transform.DOScale(1, 0.2f)));
                     seq.AppendCallback(() => {
                         item.transform.localRotation = Quaternion.Euler(0,0,0);
                     });
